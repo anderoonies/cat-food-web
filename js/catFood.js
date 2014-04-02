@@ -46,7 +46,7 @@ function isOpen(){
                      "style" : 'width: ' + $time_percent + '100%;',
                      "aria-valuenow" : $time_percent,
                  }).addClass(' progress-bar-success');
-                 $('#'+$id).find('span').append(' closes at ' + $time_left);
+                 $('#'+$id).find('span').append('<span class="hidden-xs">closes at ' + $time_left + '</span>');
                  break;
              }
         }
@@ -69,7 +69,7 @@ function isOpen(){
                     }
                     $time_until=hours + ':' + minutes;
                     $($id).find('span')
-                    $('#'+$id).find('span').append(' opens at ' + $time_until);
+                    $('#'+$id).find('span').append('<span class="hidden-xs"> opens at ' + $time_until + '</span>');
                     break;
                 }
             }
