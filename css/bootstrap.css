@@ -2449,6 +2449,7 @@ input[type="button"].btn-block {
   content: "\e013";
 }
 .glyphicon-remove:before {
+    
   content: "\e014";
 }
 .glyphicon-zoom-in:before {
