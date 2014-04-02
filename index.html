@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cat Food</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+      
+    <!-- User-fed CSS -->
+    <link rel="stylesheet" href="catFood.css" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/catFood.js"></script>  
+  </head>
+  <body onload="eqRate(); isOpen();">
+      <div class="container" id="content">
+          <div class="container">
+          <ul class="nav nav-tabs nav-justified" data-tabs="tabs" id="tabs">
+              <li class="active"><a href="#halls" data-toggle="tab"><p class="section">Dining Halls</p></a></li>
+              <li><a href="#cstores" data-toggle="tab"><p class="section">C-Stores</p></a></li>
+              <li><a href="#"><p class="section eq" id="eqtime">Equivalencies: </p></a></li>
+          </ul>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane active" id="halls">
+                <div class="container">
+                    <div class="jumbotron diningHalls">
+                        <div class="progress">
+                          <div id="Allison" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                            <span>
+                            <a href="https://nucuisine.sodexomyway.com/dining-choices/resident/allison.html">Allison</a>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="progress">
+                          <div id="Willard" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                            <span>
+                            <a href="https://nucuisine.sodexomyway.com/dining-choices/resident/willard.html">Willard</a>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="progress">
+                          <div id="Hinman" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                              <span>
+                            <a href="https://nucuisine.sodexomyway.com/dining-choices/resident/1835-hinman.html">Hinman</a>
+                              </span>
+                          </div>
+                        </div>
+                        <div class="progress">
+                          <div id="PlexEast" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                              <span>
+                              <a href="https://nucuisine.sodexomyway.com/dining-choices/resident/foster-walker.html">Plex East</a>
+                              </span>
+                          </div>
+                        </div>
+                        <div class="progress">
+                          <div id="PlexWest" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                              <span>
+                              <a href="https://nucuisine.sodexomyway.com/dining-choices/resident/foster-walker.html">Plex West</a>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="progress">
+                          <div id="Sargent" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                              <span>
+                              <a href="https://nucuisine.sodexomyway.com/dining-choices/resident/sargent.html">Sargent</a>
+                              </span>
+                          </div>
+                        </div>
+                        <div class="progress">
+                          <div id="Elder" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                              <span>
+                              <a href="https://nucuisine.sodexomyway.com/dining-choices/resident/elder.html">Elder</a>
+                              </span>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            <div class="tab-pane" id="cstores">
+                <div class="container">
+                    <div class="jumbotron cStores" id="cstores">
+                        <div class="progress">
+                          <div id="PlexC" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                              <span>
+                              Plex
+                              </span>
+                          </div>
+                        </div>
+                        <div class="progress">
+                          <div id="HinmanC" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                              <span>
+                              Hinman
+                              </span>
+                          </div>
+                        </div>
+                        <div class="progress">
+                          <div id="WillardC" class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                              <span>
+                              Willard
+                              </span>
+                          </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+            <div class="tab-pane" id="equivalencies">
+                <div class="container">
+                    <div class="container jumbotron" id="equivalencies">
+                            <p class="lead" id="eqtime">currently worth: </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+          <div id="footer">
+              <div class="container">
+                  <p class="muted credit">
+                  By <a href="https://github.com/anderoonies/">Andy Bayer</a>
+                  </p>
+              </div>
+          </div>
+    
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+    </div>
+  </body>
+</html>
