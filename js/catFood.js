@@ -46,11 +46,9 @@ function isOpen(){
                      "style" : 'width: ' + $time_percent + '100%;',
                      "aria-valuenow" : $time_percent,
                  }).addClass(' progress-bar-success');
-                 $('#'+$id).find('.hidden-xs').append('closes at ' + $time_left);
+                 $('#'+$id).find('.hidden-xs').append(' closes at ' + $time_left);
                  break;
              }
-            $('#'+$id).find('.hidden-xs').append(' is closed for the day ');
-            break;
         }
     });
     
@@ -73,6 +71,7 @@ function isOpen(){
                     $('#'+$id).find('.hidden-xs').append(' opens at ' + $time_until);
                     break;
                 }
+                $('#'+$id).find('.hidden-xs').append(' is closed for the day ');
             }
         }
     });
