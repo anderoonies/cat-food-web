@@ -49,6 +49,8 @@ function isOpen(){
                  $('#'+$id).find('.hidden-xs').append('closes at ' + $time_left);
                  break;
              }
+            $('#'+$id).find('.hidden-xs').append(' is closed for the day ');
+            break;
         }
     });
     
