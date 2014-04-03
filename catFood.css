@@ -28,7 +28,7 @@ body {
 }
 
 @media (max-width: 632px) {
-  #content {
+  .container {
     width: 100%;
   }
 }
