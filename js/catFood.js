@@ -72,6 +72,10 @@ function isOpen(){
                     $('#'+$id).find('span').append(' opens at ' + $time_until);
                     break;
                 }
+                else {
+                    $('#'+$id).find('span').append(' is closed until tomorrow ');
+                    break;
+                };
             }
         }
     });
