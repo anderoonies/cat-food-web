@@ -27,6 +27,13 @@ body {
     padding-top: 10px;
 }
 
+@media (min-width: 768px) {
+  #content {
+    width: 100%;
+  }
+}
+
+
 .nav {
   padding-left: 0;
   margin-bottom: 0;
@@ -152,8 +159,3 @@ body {
 
 }
 
-@media (min-width: 768px) {
-  .container {
-    width: 100%;
-  }
-}
