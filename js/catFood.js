@@ -67,14 +67,14 @@ function isOpen(){
                     if (minutes.length==1){
                         minutes += 0;
                     }
+                    
                     $time_until=hours + ':' + minutes;
                     $('#'+$id).find('.hidden-xs').append(' opens at ' + $time_until);
                     break;
                 }
-                else {
+                else
                     $('#'+$id).find('.hidden-xs').append(' is closed for the day ');
                     break;
-                };
             }
         }
     });
