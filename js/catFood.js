@@ -46,7 +46,7 @@ function isOpen(){
                      "style" : 'width: ' + $time_percent + '100%;',
                      "aria-valuenow" : $time_percent,
                  }).addClass(' progress-bar-success');
-                 $('#'+$id).find('span').append('closes at ' + $time_left);
+                 $('#'+$id).find('.hidden-xs').append('closes at ' + $time_left);
                  break;
              }
         }
@@ -73,7 +73,7 @@ function isOpen(){
                     break;
                 }
                 else {
-                    $('#'+$id).find('span').append(' is closed for the day ');
+                    $('#'+$id).find('.hidden-xs').append(' is closed for the day ');
                     break;
                 };
             }
