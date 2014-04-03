@@ -69,7 +69,7 @@ function isOpen(){
                     }
                     $time_until=hours + ':' + minutes;
                     $($id).find('span')
-                    $('#'+$id).find('span').append(' opens at ' + $time_until);
+                    $('#'+$id).find('.hidden-xs').append(' opens at ' + $time_until);
                     break;
                 }
                 else {
