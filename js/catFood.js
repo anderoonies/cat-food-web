@@ -71,6 +71,9 @@ function isOpen(){
                     $('#'+$id).find('.hidden-xs').append(' opens at ' + $time_until);
                     break;
                 }
+                else if (i=(times[today.getDay()][$id].length-1)){
+                    $('#'+$id).find('.hidden-xs').append(' is closed for the day ');       
+                };
             }
         }
     });
