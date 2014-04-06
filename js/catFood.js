@@ -73,7 +73,11 @@ function isOpen(){
                 }
                 else if (i==times[today.getDay()][$id].length){
                     $('#'+$id).find('.hidden-xs').append(' is closed for the day ');       
-                };
+                }
+                
+                else if (times[today.getDay()][$id][i][0]==0){
+                    $('#'+$id).find('.hidden-xs').append(' is closed for the day ');
+                }
             }
         }
     });
