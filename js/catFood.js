@@ -21,13 +21,13 @@ var current_time = (today.getTime() - zero_hour.getTime()) / 1000 / 60;
 function eqRate() {
     setTimeout("eqRate()", 1000);
     if (450 <= current_time && current_time <= 645) {
-        document.getElementById('eqtime').innerHTML="Equivalencies: $5.00";
+        $('.eqtime').html("Equivalencies: $5.00");
     }
     else if (1005 < current_time && current_time <= 1170) {
-        document.getElementById('eqtime').innerHTML="Equivalencies: $9.00";
+        $('.eqtime').html("Equivalencies: $9.00");
     }
     else
-        document.getElementById('eqtime').innerHTML="Equivalencies: $7.00";
+        $('.eqtime').html("Equivalencies: $7.00");
 };
     
 
