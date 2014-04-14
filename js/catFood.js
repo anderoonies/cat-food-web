@@ -2,6 +2,13 @@ jQuery(document).ready(function ($) {
         $('#tabs').tab();
     });
 
+$(function(){ 
+    var navMain = $(".navbar-collapse");
+
+    navMain.on("click", "a", null, function () {
+        navMain.collapse('hide');
+    });
+});
 
 var today = new Date();
 var zero_hour = new Date();
