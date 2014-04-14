@@ -171,3 +171,9 @@ body {
 #nav-container {
     background-color: #fff;
 }
+
+
+
+.nav-button {
+    border: none;
+}
