@@ -49,6 +49,9 @@ function isOpen(){
                      minutes += 0;
                  }
                  $time_left=hours + ':' + minutes;
+                 if ($time_left=='0:00'){
+                     $time_left='12:00'
+                 }
                  $(this).attr({
                      "style" : 'width: ' + $time_percent + '100%;',
                      "aria-valuenow" : $time_percent,
@@ -78,7 +81,7 @@ function isOpen(){
                     $('#'+$id).find('.hidden-xs').append(' opens at ' + $time_until);
                     break;
                 }
-                else if (i==times[today.getDay()][$id].length){
+                else if (i==times[today.getDay()][$id].length-1){
                     $('#'+$id).find('.hidden-xs').append(' is closed for the day ');       
                 }
                 
@@ -113,7 +116,7 @@ var times = {
         "Crowe": [[0,0]],
         "Einstein": [[0,0]],
         "Frans": [[1140,1440]],
-        "Lisas": [[1,120],[720,1140]],
+        "Lisas": [[1,120],[720,1440]],
         "Plaza": [[1020,1440]],
         "TechXpress": [[0,0]]
     },
@@ -139,8 +142,8 @@ var times = {
         "Crowe": [[480,1020]],
         "Einstein": [[480,960]],
         "Frans": [[1,120],[1200,1440]],
-        "Lisas": [[1,120],[660,1140]],
-        "Plaza": [[510,1140]],
+        "Lisas": [[1,120],[660,1440]],
+        "Plaza": [[510,1440]],
         "TechXpress": [[450,1110]]
     },
 
@@ -165,8 +168,8 @@ var times = {
         "Crowe": [[480,1020]],
         "Einstein": [[480,960]],
         "Frans": [[1,120],[1200,1440]],
-        "Lisas": [[1,120],[660,1140]],
-        "Plaza": [[510,1140]],
+        "Lisas": [[1,120],[660,1440]],
+        "Plaza": [[510,1440]],
         "TechXpress": [[450,1110]]
     },
 
@@ -191,8 +194,8 @@ var times = {
         "Crowe": [[480,1020]],
         "Einstein": [[480,960]],
         "Frans": [[1,120],[1200,1440]],
-        "Lisas": [[1,120],[660,1140]],
-        "Plaza": [[510,1140]],
+        "Lisas": [[1,120],[660,1440]],
+        "Plaza": [[510,1440]],
         "TechXpress": [[450,1110]]
     }, 
 
@@ -217,8 +220,8 @@ var times = {
         "Crowe": [[480,1020]],
         "Einstein": [[480,960]],
         "Frans": [[1,120],[1200,1440]],
-        "Lisas": [[1,120],[660,1140]],
-        "Plaza": [[510,1140]],
+        "Lisas": [[1,120],[660,1440]],
+        "Plaza": [[510,1440]],
         "TechXpress": [[450,1110]]
     },
 
@@ -243,7 +246,7 @@ var times = {
         "Crowe": [[480,900]],
         "Einstein": [[480,900]],
         "Frans": [[1,120]],
-        "Lisas": [[1,120],[660,1140]],
+        "Lisas": [[1,120],[660,1440]],
         "Plaza": [[510,900]],
         "TechXpress": [[450,900]]
         
@@ -270,7 +273,7 @@ var times = {
         "Crowe": [[0,0]],
         "Einstein": [[0,0]],
         "Frans": [[0,0]],
-        "Lisas": [[1,120],[660,1140]],
+        "Lisas": [[1,120],[660,1440]],
         "Plaza": [[720,960]],
         "TechXpress": [[0,0]]
     }
