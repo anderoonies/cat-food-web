@@ -41,22 +41,25 @@ function isOpen(){
     $('.progress-bar').each(function(){
         $id=$(this).attr('id');
         for (var i=0; i<times[today.getDay()][$id].length;i++){ 
-             if (between(current_time, times[today.getDay()][$id][i][0] , times[today.getDay()][$id][i][1])) {
-                 $time_percent=100*(times[today.getDay()][$id][i][1] - current_time)/(times[today.getDay()][$id][i][1] - times[today.getDay()][$id][i][0]);
-                 hours=((Math.floor((times[today.getDay()][$id][i][1])/60)%24)%12).toString();
+             if (between(current_time, times[today.getDay()][$id][i][0] , times[today.getDay()][$id][i][1])) { //if the current time is between op and close times
+                 $time_percent=100*(times[today.getDay()][$id][i][1] - current_time)/(120); //generate the progress bar percent
+                 hours=((Math.floor((times[today.getDay()][$id][i][1])/60)%24)%12).toString(); //generate strings for hours and minutes
                  minutes=((times[today.getDay()][$id][i][1])%60).toString();
-                 if (minutes.length==1){
+                 if (minutes.length==1){ //handle the exception, somewhat crudely
                      minutes += 0;
                  }
-                 $time_left=hours + ':' + minutes;
-                 if ($time_left=='0:00'){
+                 $time_left=hours + ':' + minutes; //edit string
+                 if ($time_left=='0:00'){ //handle the exception
                      $time_left='12:00'
                  }
                  $(this).attr({
-                     "style" : 'width: ' + $time_percent + '100%;',
-                     "aria-valuenow" : $time_percent,
-                 }).addClass(' progress-bar-success');
-                 $('#'+$id).find('.hidden-xs').append(' closes at ' + $time_left);
+                     "style" : 'width: ' + $time_percent + '100%;', //create the percent bar
+                     "aria-valuenow" : $time_percent, 
+                 }).addClass(' progress-bar-success'); //add percent bar
+                 $('#'+$id).find('.hidden-xs').append(' closes at ' + $time_left); //add the 'closes at' value on browser only
+                 if ((times[today.getDay()][$id][i][1] - current_time)<=20){ //determine if the time left warrants a warning bar
+                    $(this).removeClass(' progress-bar-success').addClass(' progress-bar-warning');
+                 };
                  break;
              }
         }
@@ -64,11 +67,11 @@ function isOpen(){
     
     
     $('.progress-bar').each(function(){
-        if (!$( this ).hasClass('progress-bar-success')) {
+        if (!($( this ).hasClass('progress-bar-success')||$(this).hasClass('progress-bar-warning'))) { //if there isn't an existing bar (another way of checking openness)
             $(this).attr({
                 "style": 'width: 100%;',
                 "aria-valuenow": '100',
-            }).addClass('progress-bar-danger');
+            }).addClass('progress-bar-danger'); //create a red progress bar
             $id=$(this).attr('id');
             for (var i=0; i<times[today.getDay()][$id].length;i++){
                 if (current_time<times[today.getDay()][$id][i][0]){
@@ -78,15 +81,15 @@ function isOpen(){
                         minutes += 0;
                     }
                     $time_until=hours + ':' + minutes;
-                    $('#'+$id).find('.hidden-xs').append(' opens at ' + $time_until);
+                    $('#'+$id).find('.hidden-xs').append(' opens at ' + $time_until); //create and set the time left value
                     break;
                 }
                 else if (i==times[today.getDay()][$id].length-1){
-                    $('#'+$id).find('.hidden-xs').append(' is closed for the day ');       
+                    $('#'+$id).find('.hidden-xs').append(' is closed for the day '); //if the dining hall is closed for the day 
                 }
                 
                 else if (times[today.getDay()][$id][i][0]==0){
-                    $('#'+$id).find('.hidden-xs').append(' is closed for the day ');
+                    $('#'+$id).find('.hidden-xs').append(' is closed for the day '); //if the dining hall was never open today
                 }
             }
         }
