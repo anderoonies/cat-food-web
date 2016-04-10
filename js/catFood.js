@@ -1,102 +1,103 @@
-jQuery(document).ready(function ($) {
-        $('#tabs').tab();
-    });
+$(document).ready(function() {
+  // initlaize tabs
+  $('#tabs').tab();
 
-$(function(){ 
-    var navMain = $(".navbar-collapse");
+  // initialize mobile nav
+  var navMain = $(".navbar-collapse");
+  navMain.on("click", "a", null, function () {
+      navMain.collapse('hide');
+  });
 
-    navMain.on("click", "a", null, function () {
-        navMain.collapse('hide');
-    });
+  isOpen();
+  getEquivalencyRate();
+
+  setTimeout(function() {
+    getEquivalencyRate();
+  }, 2000);
 });
 
 var today = new Date();
-var zero_hour = new Date();
-zero_hour.setHours(0);
-zero_hour.setMinutes(0);
-zero_hour.setSeconds(0);
-zero_hour.setMilliseconds(0);
-var current_time = (today.getTime() - zero_hour.getTime()) / 1000 / 60;
+var zeroTime = new Date();
+zeroTime.setHours(0);
+zeroTime.setMinutes(0);
+zeroTime.setSeconds(0);
+zeroTime.setMilliseconds(0);
+var current_time = (today.getTime() - zeroTime.getTime()) / 1000 / 60;
 
-function eqRate() {
-    setTimeout("eqRate()", 1000);
-    if (450 <= current_time && current_time <= 645) {
-        $('.eqtime').html("Equivalencies: $5.00");
-    }
-    else if (1005 < current_time && current_time <= 1170) {
-        $('.eqtime').html("Equivalencies: $9.00");
-    }
-    else
-        $('.eqtime').html("Equivalencies: $7.00");
+function getEquivalencyRate() {
+  if (450 <= current_time && current_time <= 645) {
+    $('.eqtime').html("Equivalencies: $5.00");
+  } else if (1005 < current_time && current_time <= 1170) {
+    $('.eqtime').html("Equivalencies: $9.00");
+  } else {
+    $('.eqtime').html("Equivalencies: $7.00");
+  }
 };
-    
 
-    
 function between(x, min, max) {
     return x >= min && x <= max;
 };
 
+function formatTimeString(hours, minutes) {
+  if (minutes.length == 1) {
+    minutes += 0;
+  }
 
-function isOpen(){
-    $('.progress-bar').each(function(){
-        $id=$(this).attr('id');
-        for (var i=0; i<times[today.getDay()][$id].length;i++){ 
-             if (between(current_time, times[today.getDay()][$id][i][0] , times[today.getDay()][$id][i][1])) { //if the current time is between op and close times
-                 $time_percent=100*(times[today.getDay()][$id][i][1] - current_time)/(120); //generate the progress bar percent
-                 hours=((Math.floor((times[today.getDay()][$id][i][1])/60)%24)%12).toString(); //generate strings for hours and minutes
-                 minutes=((times[today.getDay()][$id][i][1])%60).toString();
-                 if (minutes.length==1){ //handle the exception, somewhat crudely
-                     minutes += 0;
-                 }
-                 $time_left=hours + ':' + minutes; //edit string
-                 if ($time_left=='0:00'){ //handle the exception
-                     $time_left='12:00'
-                 }
-                 $(this).attr({
-                     "style" : 'width: ' + $time_percent + '100%;', //create the percent bar
-                     "aria-valuenow" : $time_percent, 
-                 }).addClass(' progress-bar-success'); //add percent bar
-                 $('#'+$id).find('.hidden-xs').append(' closes at ' + $time_left); //add the 'closes at' value on browser only
-                 if ((times[today.getDay()][$id][i][1] - current_time)<=20){ //determine if the time left warrants a warning bar
-                    $(this).removeClass(' progress-bar-success').addClass(' progress-bar-warning');
-                 };
-                 break;
-             }
+  if (hours == '0') {
+    hours = '12';
+  }
+
+  return hours + ':' + minutes;
+}
+
+function isOpen() {
+  var currentDay = today.getDay();
+  var openTime, closeTime, time_percent, hours, minutes, time_left;
+
+  $('.progress-bar').each(function() {
+    id = $(this).attr('id');
+    for (var i = 0; i<times[currentDay][id].length; i++) {
+      openTime = times[currentDay][id][i][0];
+      closeTime = times[currentDay][id][i][1];
+      if (between(current_time, openTime, closeTime)) { //if the current time is between op and close times
+        time_percent = 100 * (closeTime - current_time) / 120; //generate the progress bar percent
+        hours = (Math.floor((closeTime / 60) % 24) % 12).toString(); //generate strings for hours and minutes
+        minutes = ((closeTime) % 60).toString();
+        time_left = formatTimeString(hours, minutes);
+        $(this).attr({
+          "style" : 'width: ' + time_percent + '100%;', //create the percent bar
+          "aria-valuenow" : time_percent
+        }).addClass(' progress-bar-success'); //add percent bar
+
+        $(this).find('.hidden-xs').append(' closes at ' + time_left); //add the 'closes at' value on browser only
+
+        if ((closeTime - current_time) <= 20) { //determine if the time left warrants a warning bar
+          $(this).removeClass(' progress-bar-success').addClass(' progress-bar-warning');
+        };
+
+        break;
+      } else {
+        // closed
+        $(this).attr({
+            "style": 'width: 100%;',
+            "aria-valuenow": '100',
+        }).addClass('progress-bar-danger');
+
+        if (current_time < openTime) {
+          hours = ((Math.floor((openTime) / 60) % 24) % 12).toString();
+          minutes = (openTime % 60).toString();
+          time_left = formatTimeString(hours, minutes);
+          $('#' + id).find('.hidden-xs').append(' opens at ' + time_left); //create and set the time left value
+          break;
+        } else if ((i == times[currentDay][id].length - 1) || (openTime == 0)) {
+          $('#' + id).find('.hidden-xs').append(' is closed for the day '); //if the dining hall is closed for the day
         }
-    });
-    
-    
-    $('.progress-bar').each(function(){
-        if (!($( this ).hasClass('progress-bar-success')||$(this).hasClass('progress-bar-warning'))) { //if there isn't an existing bar (another way of checking openness)
-            $(this).attr({
-                "style": 'width: 100%;',
-                "aria-valuenow": '100',
-            }).addClass('progress-bar-danger'); //create a red progress bar
-            $id=$(this).attr('id');
-            for (var i=0; i<times[today.getDay()][$id].length;i++){
-                if (current_time<times[today.getDay()][$id][i][0]){
-                    hours=((Math.floor((times[today.getDay()][$id][i][0])/60)%24)%12).toString();
-                    minutes=((times[today.getDay()][$id][i][0])%60).toString();
-                    if (minutes.length==1){
-                        minutes += 0;
-                    }
-                    $time_until=hours + ':' + minutes;
-                    $('#'+$id).find('.hidden-xs').append(' opens at ' + $time_until); //create and set the time left value
-                    break;
-                }
-                else if (i==times[today.getDay()][$id].length-1){
-                    $('#'+$id).find('.hidden-xs').append(' is closed for the day '); //if the dining hall is closed for the day 
-                }
-                
-                else if (times[today.getDay()][$id][i][0]==0){
-                    $('#'+$id).find('.hidden-xs').append(' is closed for the day '); //if the dining hall was never open today
-                }
-            }
-        }
-    });
+      }
+    }
+  })
 };
-    
-     
+
+
 var times = {
     0 : {
         "Hinman" : [[0,0]],
@@ -200,7 +201,7 @@ var times = {
         "Lisas": [[1,120],[660,1440]],
         "Plaza": [[510,1440]],
         "TechXpress": [[450,1110]]
-    }, 
+    },
 
     4 : {
         "Hinman" : [[450,585],[645,1200]],
@@ -252,7 +253,7 @@ var times = {
         "Lisas": [[1,120],[660,1440]],
         "Plaza": [[510,900]],
         "TechXpress": [[450,900]]
-        
+
     },
 
     6 : {
@@ -281,6 +282,3 @@ var times = {
         "TechXpress": [[0,0]]
     }
 }
-
-    
-            
